@@ -1,0 +1,35 @@
+import { Photo } from './Photo';
+export interface Member {
+  dateOfBirth: string;
+  knownAs: string | null;
+  created: string;
+  lastActive: string;
+  gender: string;
+  introduction: string;
+  lookingFor: string;
+  interests: string;
+  city: string;
+  country: string;
+  tier: string | null;
+  photos: Photo[] | null;
+  likedByUsers: any[] | null;
+  likedUsers: any[] | null;
+  messagesSent: any[] | null;
+  messagesReceived: any[] | null;
+  userRoles: any[] | null;
+  id: number;
+  userName: string;
+  normalizedUserName: string;
+  email: string | null;
+  normalizedEmail: string | null;
+  emailConfirmed: boolean;
+  passwordHash: string;
+  securityStamp: string;
+  concurrencyStamp: string;
+  phoneNumber: string | null;
+  phoneNumberConfirmed: boolean;
+  twoFactorEnabled: boolean;
+  lockoutEnd: string | null;
+  lockoutEnabled: boolean;
+  accessFailedCount: number;
+}

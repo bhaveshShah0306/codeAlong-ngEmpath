@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "moduleResolution": "bundler",
+    "types": [],
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": ["ES2022", "dom"]
+  },
+  "files": ["src/main.ts"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
