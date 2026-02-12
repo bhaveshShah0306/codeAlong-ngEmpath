@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Member } from 'src/core/Members';
 import { RegisterComponent } from 'src/features/register/register.component';
@@ -8,7 +8,7 @@ import { AccountService } from 'src/services/account.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [RegisterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     console.log('Members data:', data); // Check if data is coming
     this.members.set(data);
   }
-
+  @Input({ required: true }) usersFromApp: Member[] = [];
   showRegister() {
     this.registerMode.set(true);
   }
