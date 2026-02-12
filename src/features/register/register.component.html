@@ -1,41 +1,40 @@
-<div
-  class="card bg-base-100 w-96 mx-auto flex flex-col rounded-lg !shadow-2xl mt-10"
->
-  <div class="card-title justify-center text-3xl text-primary">Sign Up</div>
-  <form
-    #registerForm="ngForm"
-    class="flex flex-col gap-4 w-full"
-    (ngSubmit)="register()"
-  >
-    <input
-      type="text"
-      name="username"
-      placeholder="Username"
-      class="input w-full"
-      [(ngModel)]="creds.userName"
-      class="input input-bordered w-full"
-    />
-    <input
-      type="password"
-      name="password"
-      placeholder="Password"
-      class="input w-full"
-      [(ngModel)]="creds.password"
-      class="input input-bordered w-full"
-    />
-    <input
-      type="text"
-      name="knownAs"
-      placeholder="Also Known As"
-      class="input w-full"
-      [(ngModel)]="creds.knownAs"
-      class="input input-bordered w-full"
-    />
-    <div class="flex items-center justify-end gap-3">
-      <button type="button" class="btn btn-secondary" (click)="cancel()">
-        Cancel
-      </button>
-      <button type="submit" class="btn btn-primary">Register</button>
+<div class="card bg-base-100 w-96 shadow-2xl">
+  <div class="card-body">
+    <div class="card-title justify-center text-3xl text-primary mb-4">
+      Sign Up
     </div>
-  </form>
+    <form
+      #registerForm="ngForm"
+      class="flex flex-col gap-4 w-full"
+      (ngSubmit)="register()"
+    >
+      <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        [(ngModel)]="creds.userName"
+        class="input input-bordered w-full"
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        [(ngModel)]="creds.password"
+        class="input input-bordered w-full"
+      />
+      <input
+        type="text"
+        name="knownAs"
+        placeholder="Also Known As"
+        [(ngModel)]="creds.knownAs"
+        class="input input-bordered w-full"
+      />
+      <div class="flex items-center justify-end gap-3">
+        <button type="button" class="btn btn-secondary" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </div>
+    </form>
+  </div>
 </div>

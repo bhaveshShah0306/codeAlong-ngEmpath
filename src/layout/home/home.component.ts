@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Member } from 'src/core/Members';
+import { RegisterComponent } from 'src/features/register/register.component';
 import { AccountService } from 'src/services/account.service';
 
 @Component({
@@ -28,6 +29,10 @@ export class HomeComponent implements OnInit {
 
   showRegister() {
     this.registerMode.set(true);
+  }
+
+  cancelRegister() {
+    this.registerMode.set(false);
   }
   setCurrentUser() {
     const userString = localStorage.getItem('user');

@@ -68,7 +68,7 @@
     </div>
   </div>
 } @else {
-  <div class="pt-24 text-2xl text-center flex justify-center">
-    <app-register></app-register>
+  <div class="min-h-screen flex items-center justify-center bg-base-200">
+    <app-register (cancelRegister)="cancelRegister()"></app-register>
   </div>
 }

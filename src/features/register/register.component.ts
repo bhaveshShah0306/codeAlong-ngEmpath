@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RegisterDto } from 'src/core/RegisterDto';
 
@@ -10,6 +10,7 @@ import { RegisterDto } from 'src/core/RegisterDto';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+  @Output() cancelRegister = new EventEmitter<void>();
   protected creds: RegisterDto = { userName: '', password: '', knownAs: '' };
 
   register() {
@@ -17,6 +18,6 @@ export class RegisterComponent {
   }
 
   cancel() {
-    console.log('Registration cancelled');
+    this.cancelRegister.emit();
   }
 }
