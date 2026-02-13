@@ -10,5 +10,5 @@ import { Member } from 'src/core/Members';
 })
 export class MembersListComponent {
   protected title = 'Empath App';
-  protected membersfromHome = input.required<Member[]>();
+  members = input.required<Member[]>();
 }

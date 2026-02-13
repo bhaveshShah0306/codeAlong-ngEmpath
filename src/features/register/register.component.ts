@@ -25,7 +25,7 @@ export class RegisterComponent {
   async ngOnInit() {
     try {
       // this.members.set(this.membersFromHome());
-      // const members = await this.memberService.getMembers();
+      // const members = await this.getMembers();
       // this.members.set(members);
     } catch (error) {
       console.error('Error fetching members:', error);

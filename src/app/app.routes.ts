@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { membersResolver } from 'src/services/members/members.resolver';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,7 @@ export const routes: Routes = [
       import('./../features/members/members-list/members-list.component').then(
         (m) => m.MembersListComponent,
       ),
+    resolve: { members: membersResolver },
   },
   {
     path: 'members/:id',
