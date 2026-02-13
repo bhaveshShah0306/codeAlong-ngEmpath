@@ -1,6 +1,15 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Member } from 'src/core/Members';
 import { RegisterDto } from 'src/core/RegisterDto';
+import { AccountService } from 'src/services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -10,14 +19,39 @@ import { RegisterDto } from 'src/core/RegisterDto';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  @Output() cancelRegister = new EventEmitter<void>();
-  protected creds: RegisterDto = { userName: '', password: '', knownAs: '' };
+  cancelRegister = output<boolean>();
+  protected creds: RegisterDto = {
+    userName: '',
+    email: '',
+    password: '',
+    knownAs: '',
+  };
+
+  private accountService = inject(AccountService);
+
+  async ngOnInit() {
+    try {
+      // this.members.set(this.membersFromHome());
+      // const members = await this.memberService.getMembers();
+      // this.members.set(members);
+    } catch (error) {
+      console.error('Error fetching members:', error);
+    }
+  }
 
   register() {
-    console.log('Registering user with creds:', this.creds);
+    this.accountService.register(this.creds).subscribe({
+      next: (user) => {
+        console.log('User registered:', user);
+        this.cancel();
+      },
+      error: (error) => {
+        console.error('Error registering user:', error);
+      },
+    });
   }
 
   cancel() {
-    this.cancelRegister.emit();
+    this.cancelRegister.emit(false);
   }
 }

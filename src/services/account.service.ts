@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { LoginDto } from 'src/core/login';
+import { RegisterDto } from 'src/core/RegisterDto';
 import { UserDto } from 'src/core/userdto';
 
 @Injectable({
@@ -12,6 +13,17 @@ export class AccountService {
   currentUser = signal<UserDto | null>(null);
 
   baseUrl = 'https://localhost:5001/api/';
+  register(creds: RegisterDto) {
+    return this.http
+      .post<UserDto>(this.baseUrl + 'account/register', creds)
+      .pipe(
+        tap((user) => {
+          if (user) {
+            this.setCurrentUser(user);
+          }
+        }),
+      );
+  }
   login(creds: LoginDto) {
     return this.http
       .post<UserDto>(this.baseUrl + 'account/login', creds, {
@@ -19,8 +31,9 @@ export class AccountService {
       })
       .pipe(
         tap((user) => {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUser.set(user);
+          if (user) {
+            this.setCurrentUser(user);
+          }
         }),
       );
   }
@@ -29,9 +42,8 @@ export class AccountService {
     localStorage.removeItem('user');
     this.currentUser.set(null);
   }
-  getCurrentUser() {
-    return this.http.get(this.baseUrl + 'account/current', {
-      withCredentials: true,
-    });
+  setCurrentUser(user: UserDto) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUser.set(user);
   }
 }

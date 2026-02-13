@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 
@@ -12,4 +12,15 @@ import { NavbarComponent } from '../layout/navbar/navbar.component';
     'data-theme': 'light',
   },
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  constructor() {}
+  ngOnInit() {
+    this.loadMembers();
+  }
+  async loadMembers() {
+    try {
+    } catch (error) {
+      console.error('Error fetching members:', error);
+    }
+  }
+}

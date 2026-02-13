@@ -23,22 +23,18 @@ export class HomeComponent implements OnInit {
     // this.members.set(await this.getMembers());
     this.setCurrentUser();
     const data = await this.getMembers();
-    console.log('Members data:', data); // Check if data is coming
     this.members.set(data);
   }
-  @Input({ required: true }) usersFromApp: Member[] = [];
-  showRegister() {
-    this.registerMode.set(true);
+
+  showRegister(value: boolean) {
+    this.registerMode.set(value);
   }
 
-  cancelRegister() {
-    this.registerMode.set(false);
-  }
   setCurrentUser() {
     const userString = localStorage.getItem('user');
     if (!userString) return;
     const user = JSON.parse(userString);
-    next: this.accountService.currentUser.set(user);
+    this.accountService.currentUser.set(user);
   }
 
   async getMembers() {

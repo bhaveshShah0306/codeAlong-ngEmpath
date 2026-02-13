@@ -16,7 +16,7 @@
           build healthier connections, make thoughtful decisions, and respond
           with clarity instead of impulse.
         </p>
-        <button (click)="showRegister()" class="btn btn-primary">
+        <button (click)="showRegister(true)" class="btn btn-primary">
           Register now
         </button>
         <div class="divider divider-accent my-1"></div>
@@ -69,6 +69,6 @@
   </div>
 } @else {
   <div class="min-h-screen flex items-center justify-center bg-base-200">
-    <app-register (cancelRegister)="cancelRegister()"></app-register>
+    <app-register (cancelRegister)="showRegister($event)"></app-register>
   </div>
 }
