@@ -14,9 +14,10 @@ import { AccountService } from 'src/services/account.service';
 })
 export class HomeComponent implements OnInit {
   private accountService = inject(AccountService);
-  protected title = 'Empath App';
+
   protected registerMode = signal<boolean>(false);
   protected members = signal<Member[]>([]);
+
   private http = inject(HttpClient);
 
   async ngOnInit() {

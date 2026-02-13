@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterOutlet, Router } from '@angular/router';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 
 @Component({
@@ -14,6 +14,7 @@ import { NavbarComponent } from '../layout/navbar/navbar.component';
 })
 export class AppComponent implements OnInit {
   constructor() {}
+  protected router = inject(Router);
   ngOnInit() {
     this.loadMembers();
   }

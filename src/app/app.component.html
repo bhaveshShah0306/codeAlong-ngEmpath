@@ -1,4 +1,4 @@
-<app-navbar />
-<div class="pt-24 pb-10 px-4">
+<app-navbar [class.mb-20] />
+<div [class.pt-20]="router.url !== '/'">
   <router-outlet />
 </div>
