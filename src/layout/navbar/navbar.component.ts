@@ -3,12 +3,12 @@ import { MembersListComponent } from 'src/features/members/members-list/members-
 import { FormsModule } from '@angular/forms';
 import { LoginDto } from 'src/core/login';
 import { AccountService } from 'src/services/account.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })

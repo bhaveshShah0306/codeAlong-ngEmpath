@@ -44,14 +44,13 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUser.set(null);
+    this.presenceService.stopHubConnection();
   }
   setCurrentUser(user: UserDto) {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUser.set(user);
-    if (
-      this.presenceService.hubConnection?.state !== HubConnectionState.Connected
-    ) {
-      this.presenceService.createHubConnection(user);
-    }
+
+    this.presenceService.stopHubConnection();
+    this.presenceService.createHubConnection(user);
   }
 }

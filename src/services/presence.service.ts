@@ -1,26 +1,30 @@
 import { inject, Injectable } from '@angular/core';
 import {
+  HttpTransportType,
   HubConnection,
   HubConnectionBuilder,
   HubConnectionState,
 } from '@microsoft/signalr';
 import { UserDto } from 'src/core/userdto';
-import { environment } from 'src/environments/environment';
 import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PresenceService {
-  private hubUrl = environment.hubUrl;
+  private hubUrl = 'https://localhost:5001/hubs/';
   private toast = inject(ToastService);
   hubConnection?: HubConnection;
   constructor() {}
 
   createHubConnection(user: UserDto) {
+    const fullUrl = `${this.hubUrl}presence`;
+    console.log('hubUrl from environment:', this.hubUrl);
+    console.log('Full URL will be:', this.hubUrl + 'presence');
+
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(this.hubUrl + 'presence', {
-        accessTokenFactory: () => user.token,
+      .withUrl(fullUrl, {
+        accessTokenFactory: () => user.token, // This captures the NEW token
       })
       .withAutomaticReconnect()
       .build();
@@ -30,10 +34,11 @@ export class PresenceService {
       .catch((error) => console.log('Error establishing connection: ', error));
 
     this.hubConnection.on('UserOnline', (email) => {
-      // this.toast.success(`${email} has connected`);
+      console.log('✅ User online:', email);
     });
+
     this.hubConnection.on('UserOffline', (email) => {
-      // this.toast.info(`${email} has disconnected`);
+      console.log('❌ User offline:', email);
     });
   }
 
@@ -41,5 +46,6 @@ export class PresenceService {
     if (this.hubConnection?.state === HubConnectionState.Connected) {
       this.hubConnection.stop().catch((error) => console.log(error));
     }
+    this.hubConnection = undefined; // Clear the instance
   }
 }
