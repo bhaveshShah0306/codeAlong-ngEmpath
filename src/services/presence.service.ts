@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import {
   HttpTransportType,
   HubConnection,
@@ -15,6 +15,7 @@ export class PresenceService {
   private hubUrl = 'https://localhost:5001/hubs/';
   private toast = inject(ToastService);
   hubConnection?: HubConnection;
+  onlineUsers = signal<string[]>([]);
   constructor() {}
 
   createHubConnection(user: UserDto) {
@@ -33,12 +34,14 @@ export class PresenceService {
       .start()
       .catch((error) => console.log('Error establishing connection: ', error));
 
-    this.hubConnection.on('UserOnline', (email) => {
-      console.log('✅ User online:', email);
+    this.hubConnection.on('UserOnline', (userId) => {
+      this.onlineUsers.update((users) => [...users, userId]);
     });
-
-    this.hubConnection.on('UserOffline', (email) => {
-      console.log('❌ User offline:', email);
+    this.hubConnection.on('UserOffline', (userId) => {
+      this.onlineUsers.update((users) => users.filter((u) => u !== userId));
+    });
+    this.hubConnection.on('GetOnlineUsers', (userIds) => {
+      this.onlineUsers.set(userIds);
     });
   }
 
