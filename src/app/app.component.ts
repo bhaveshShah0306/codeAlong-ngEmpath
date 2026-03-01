@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 
@@ -12,16 +12,6 @@ import { NavbarComponent } from '../layout/navbar/navbar.component';
     'data-theme': 'light',
   },
 })
-export class AppComponent implements OnInit {
-  constructor() {}
+export class AppComponent {
   protected router = inject(Router);
-  ngOnInit() {
-    this.loadMembers();
-  }
-  async loadMembers() {
-    try {
-    } catch (error) {
-      console.error('Error fetching members:', error);
-    }
-  }
 }
